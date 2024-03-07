@@ -9,17 +9,17 @@ keywords: creators,toggle
 This avoids the boilerplate of having to set up another atom just to update the state of the first.
 
 ```ts
-import { WritableAtom, atom } from 'jotai'
+import { WritableAtom, atom } from 'jotai';
 
 export function atomWithToggle(
-  initialValue?: boolean,
-): WritableAtom<boolean, boolean | undefined> {
-  const anAtom = atom(initialValue, (get, set, nextValue?: boolean) => {
-    const update = nextValue ?? !get(anAtom)
-    set(anAtom, update)
-  })
+	initialValue?: boolean,
+): WritableAtom<boolean, [boolean | undefined], void> {
+	const anAtom = atom(initialValue, (get, set, nextValue?: boolean) => {
+		const update = nextValue ?? !get(anAtom);
+		set(anAtom, update);
+	});
 
-  return anAtom as WritableAtom<boolean, boolean | undefined>
+	return anAtom as WritableAtom<boolean, [boolean | undefined], void>;
 }
 ```
 
